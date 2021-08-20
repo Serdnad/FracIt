@@ -8,12 +8,10 @@
     import Index from "./routes/Fractionalize.svelte"
     // import Redeem from "./routes/Redeem.svelte"
 
-    type UserTickets = { ticketer: string; value: string; amount: number } | undefined
-
     enum Page {
-        fractionalize,
-        redeem,
-        about,
+        fractionalize = "/",
+        redeem = "/redeem",
+        about = "/about",
     }
 
     let page = Page.fractionalize
@@ -21,43 +19,9 @@
     let Tezos: TezosToolkit
     let wallet: BeaconWallet
     let userAddress = ""
-    let userTickets: UserTickets = undefined
-    let userTicketValidity: string
-    let ticketer: ContractAbstraction<Wallet>
-    let ticketerStorage: any
     let loadingProfile = true
-    let loadingBuy = false
-    let loadingRedeem = false
 
     const rpcUrl = "https://rpc.florence.tzstats.com"
-    const ticketerAddress = "KT1Vv3kTDW4rz5JhgM8XZgxcrRwFhHXXQQt6"
-
-    // const fetchUserTickets = async (
-    //     address: string,
-    //     ticketerAddress: string
-    // ): Promise<{ tickets: UserTickets; validity: string }> => {
-    //     let tickets: UserTickets
-    //     let ticketsValidity = ""
-    //     try {
-    //         ticketer = await Tezos.wallet.at(ticketerAddress)
-    //         ticketerStorage = await ticketer.storage()
-    //         const result = await ticketerStorage.tickets.get({
-    //             0: address,
-    //             1: "standard",
-    //         })
-    //         if (result) {
-    //             tickets = result[1]
-    //             ticketsValidity = result[0]
-    //         } else {
-    //             tickets = undefined
-    //             ticketsValidity = ""
-    //         }
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-    //     return { tickets, validity: ticketsValidity }
-    // }
 
     const connect = async () => {
         try {
@@ -73,9 +37,7 @@
             })
             Tezos.setWalletProvider(wallet)
             userAddress = await wallet.getPKH()
-            const { tickets, validity } = await fetchUserTickets(userAddress, ticketerAddress)
-            userTickets = tickets
-            userTicketValidity = validity
+            console.log(userAddress)
         } catch (err) {
             console.error(err)
         } finally {
@@ -89,62 +51,6 @@
         userAddress = ""
     }
 
-    const buyTickets = async (ticketAmount: number) => {
-        loadingBuy = true
-        try {
-            const pricePerTicket = await ticketerStorage.data.valid_ticket_types.get("standard")
-            const op = await ticketer.methods.buy_tickets(ticketAmount, userAddress, "standard").send({
-                amount: pricePerTicket.toNumber() * ticketAmount,
-                mutez: true,
-            })
-            await op.confirmation()
-            // refreshes the storage
-            ticketerStorage = await ticketer.storage()
-            // gets user's tickets
-            const result = await ticketerStorage.tickets.get({
-                0: userAddress,
-                1: "standard",
-            })
-            if (result) {
-                userTickets = result[1]
-                userTicketValidity = result[0]
-            } else {
-                userTickets = undefined
-                userTicketValidity = ""
-            }
-        } catch (error) {
-            console.log(error)
-        } finally {
-            loadingBuy = false
-        }
-    }
-
-    const redeemTicket = async () => {
-        loadingRedeem = true
-        try {
-            const op = await ticketer.methods.redeem_ticket("standard").send()
-            await op.confirmation()
-            // refreshes the storage
-            ticketerStorage = await ticketer.storage()
-            // gets user's tickets
-            const result = await ticketerStorage.tickets.get({
-                0: userAddress,
-                1: "standard",
-            })
-            if (result) {
-                userTickets = result[1]
-                userTicketValidity = result[0]
-            } else {
-                userTickets = undefined
-                userTicketValidity = ""
-            }
-        } catch (error) {
-            console.log(error)
-        } finally {
-            loadingRedeem = false
-        }
-    }
-
     onMount(async () => {
         Tezos = new TezosToolkit(rpcUrl)
         wallet = new BeaconWallet({
@@ -152,96 +58,35 @@
             preferredNetwork: NetworkType.FLORENCENET,
         })
         const activeAccount = await wallet.client.getActiveAccount()
-        if (activeAccount) {
-            await Tezos.setWalletProvider(wallet)
-            userAddress = activeAccount.address
+        // if (activeAccount) {
+        //     await Tezos.setWalletProvider(wallet)
+        //     userAddress = activeAccount.address
 
-            // alert(userAddress)
+        //     // alert(userAddress)
 
-            const contract = await Tezos.wallet.at("KT18tK4uAWNm4eTwCdpC6KnswYuyicV3BFUa")
-            console.log(contract)
+        //     const contract = await Tezos.wallet.at("KT18tK4uAWNm4eTwCdpC6KnswYuyicV3BFUa")
+        //     console.log(contract)
 
-            // contract.methods.name("adasd").send()
-
-            // const op = await contract.entrypoints.entrypoints.deployCoin("tz1WGvQt84b8bDbw5cMXS3MpQLBe7z7Py1rc", 1234)
-            // let methods = contract.parameterSchema.ExtractSignatures()
-            // console.log(JSON.stringify(methods, null, 2))
-
-            let op = await contract.methods.deployCoin("tz1WGvQt84b8bDbw5cMXS3MpQLBe7z7Py1rc", 1234).send()
-            console.log(op)
-            // console.log(op)
-            // const { tickets, validity } = await fetchUserTickets(userAddress, ticketerAddress)
-            // userTickets = tickets
-            // userTicketValidity = validity
-            // loadingProfile = false
-        }
+        //     let op = await contract.methods.deployCoin("tz1WGvQt84b8bDbw5cMXS3MpQLBe7z7Py1rc", 1234).send()
+        //     console.log(op)
+        // }
     })
 
-    function test() {
-        const c = Tezos.wallet.at("KT1JVPTozmv83zSDiEvM656ZMEuUsonvKV4y")
-        console.log(c)
+    function navigate(to: Page) {
+        page = to
+        window.history.pushState("", to.valueOf(), to.valueOf())
     }
 </script>
 
-<main>
-    <div class="container">
-        <div class="title">Ligo Tickets Demo</div>
-        <div class="subtitle">This dapp showcases how tickets work on Tezos</div>
-        <div class="subtitle">
-            Read more about it in <a
-                href="https://medium.com/ecad-labs-inc/how-to-use-tickets-with-ligo-e773422644b7"
-                target="_blank"
-                rel="noopener noreferrer nofollow">this article</a
-            >
-        </div>
-        <br />
-        <div>
-            {#if userAddress}
-                {#if loadingProfile}
-                    <div class="tickets">Loading your details...</div>
-                {:else}
-                    <div class="tickets">
-                        {#if userTickets && userTicketValidity}
-                            <div>Number of tickets: {userTickets.amount}</div>
-                            <div>Ticket type: {userTickets.value}</div>
-                            <div>Ticketer: {ticketerAddress}</div>
-                            <div>
-                                Valid until: {new Date(
-                                    +new Date(userTicketValidity).getTime() +
-                                        +ticketerStorage.data.ticket_validity * 1000
-                                ).toISOString()}
-                            </div>
-                        {:else}
-                            You don't have any tickets yet.
-                        {/if}
-                    </div>
-                    <br />
-                    <div class="buttons">
-                        <button
-                            class:loading={loadingBuy}
-                            disabled={loadingBuy}
-                            on:click={async () => {
-                                if (!loadingBuy) {
-                                    await buyTickets(1)
-                                }
-                            }}
-                        >
-                            Buy 1 standard ticket
-                        </button>
-                        {#if userTickets && userTickets.amount > 0}
-                            <button class:loading={loadingRedeem} on:click={redeemTicket}>
-                                Redeem 1 standard ticket
-                            </button>
-                        {/if}
-                        <button on:click={test}>Disconnect</button>
-                    </div>
-                {/if}
-            {:else}
-                <button on:click={connect}>Connect now!</button>
-            {/if}
-        </div>
-    </div>
-</main>
+<svelte:head>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,700;1,900&display=swap"
+        rel="stylesheet"
+    />
+</svelte:head>
 
 <header>
     <div class="logo">
@@ -250,9 +95,9 @@
     </div>
 
     <nav>
-        <a href="/">Fractionalize</a>
-        <a href="/redeem">Redeem</a>
-        <a href="/about">About</a>
+        <a on:click={() => navigate(Page.fractionalize)}>Fractionalize</a>
+        <a on:click={() => navigate(Page.redeem)}>Redeem</a>
+        <a on:click={() => navigate(Page.about)}>About</a>
     </nav>
 </header>
 
@@ -274,7 +119,7 @@
     :global(body) {
         background: linear-gradient(243.18deg, #700379 0%, #4f038a 100%);
     }
-    
+
     header {
         display: flex;
         justify-content: space-between;
