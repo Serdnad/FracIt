@@ -243,106 +243,97 @@
     </div>
 </main>
 
+<header>
+    <div class="logo">
+        <!-- <img src="logo.svg" alt="logo" /> -->
+        <h1>Frac It</h1>
+    </div>
+
+    <nav>
+        <a href="/">Fractionalize</a>
+        <a href="/redeem">Redeem</a>
+        <a href="/about">About</a>
+    </nav>
+</header>
+
+<main>
+    {#if page === Page.fractionalize}
+        <Index />
+    {:else if page === Page.redeem}
+        <!-- <Redeem /> -->
+    {:else if page === Page.about}
+        <About />
+    {/if}
+</main>
+
 <footer>
     <p>Powered by <b>Tezos</b></p>
 </footer>
 
-<!-- {#if page === Page.fractionalize}
-    <Index />
-{:else if page === Page.redeem} -->
-<!-- <Redeem /> -->
-
-<!-- {:else if page === Page.about}
-    <About />
-{/if} -->
 <style lang="scss">
     :global(body) {
         background: linear-gradient(243.18deg, #700379 0%, #4f038a 100%);
     }
+    
+    header {
+        display: flex;
+        justify-content: space-between;
 
-    $tezos-blue: #2e7df7;
+        background: rgba(37, 4, 64, 0.37);
 
-    .container {
-        font-size: 20px;
-        max-width: 50%;
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-left: 16px;
 
-        .title {
-            color: $tezos-blue;
-            font-size: 80px;
-            margin: 20px;
-        }
-
-        .subtitle {
-            font-size: 30px;
-            color: #333;
-            margin: 10px;
-        }
-
-        button {
-            appearance: none;
-            border: solid 2px $tezos-blue;
-            border-radius: 5px;
-            background-color: white;
-            padding: 20px;
-            font-size: 20px;
-            color: $tezos-blue;
-            transition: 0.3s;
-            cursor: pointer;
-            outline: none;
-
-            &:hover {
+            h1 {
+                margin: 0px;
                 color: white;
-                background-color: $tezos-blue;
+                font-size: 1.75em;
+                font-weight: 600;
+                margin-left: 16px;
             }
         }
 
-        a {
-            color: $tezos-blue;
-            text-decoration: underline;
+        nav {
+            display: flex;
+
+            h1 {
+                font-size: medium;
+            }
+
+            a {
+                color: white;
+                font-size: 18px;
+                font-weight: 600;
+                text-decoration: none;
+                padding: 0.5em 1em;
+                margin: 0.5em 1em;
+            }
         }
     }
 
-    .loading {
-        background: linear-gradient(92deg, #dce8f9, #2e7df7);
-        background-size: 400% 400%;
-        color: white !important;
-        border: solid 2px white !important;
-        -webkit-animation: loading 2s ease infinite;
-        -moz-animation: loading 2s ease infinite;
-        animation: loading 2s ease infinite;
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        width: 100%;
+        max-width: 1024px;
+        margin: 0 auto;
+        box-sizing: border-box;
     }
 
-    @-webkit-keyframes loading {
-        0% {
-            background-position: 0% 57%;
-        }
-        50% {
-            background-position: 100% 44%;
-        }
-        100% {
-            background-position: 0% 57%;
-        }
-    }
-    @-moz-keyframes loading {
-        0% {
-            background-position: 0% 57%;
-        }
-        50% {
-            background-position: 100% 44%;
-        }
-        100% {
-            background-position: 0% 57%;
-        }
-    }
-    @keyframes loading {
-        0% {
-            background-position: 0% 57%;
-        }
-        50% {
-            background-position: 100% 44%;
-        }
-        100% {
-            background-position: 0% 57%;
+    footer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        background: rgba(26, 26, 26, 0.6);
+
+        p {
+            color: white;
+            margin: 8px 16px;
         }
     }
 </style>
