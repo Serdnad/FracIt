@@ -33,6 +33,10 @@
 <style>
     .content {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
         max-width: var(--column-width);
         margin: var(--column-margin-top) auto 0 auto;
     }

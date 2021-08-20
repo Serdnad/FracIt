@@ -6,7 +6,7 @@
     import { NetworkType } from "@airgap/beacon-sdk"
     import About from "./routes/About.svelte"
     import Index from "./routes/Fractionalize.svelte"
-    // import Redeem from "./routes/Redeem.svelte"
+    import Redeem from "./routes/Redeem.svelte"
 
     enum Page {
         fractionalize = "/",
@@ -105,7 +105,7 @@
     {#if page === Page.fractionalize}
         <Index />
     {:else if page === Page.redeem}
-        <!-- <Redeem /> -->
+        <Redeem />
     {:else if page === Page.about}
         <About />
     {/if}

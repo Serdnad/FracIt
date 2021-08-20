@@ -1,23 +1,27 @@
 <script lang="ts">
-	export let title: string;
-	export let body: string;
+    export let title: string
+    export let body: string
 </script>
 
 <div>
-	<h4>{title}</h4>
-	<p>{body}</p>
+    <h4>{title}</h4>
+    <p>{body}</p>
 </div>
 
 <style lang="scss">
-	h4 {
-		color: white;
-		font-size: 22px;
-		margin-bottom: 0;
-	}
+    div {
+        width: 100%;
+        text-align: start;
+    }
 
-	p {
-		color: white;
-		font-size: 14px;
-		margin-top: 4px;
-	}
+    h4 {
+        color: white;
+        font-size: 22px;
+        margin-bottom: 0;
+    }
+    p {
+        color: white;
+        font-size: 14px;
+        margin-top: 4px;
+    }
 </style>
