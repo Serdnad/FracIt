@@ -14,9 +14,18 @@
   </div>
 
   <nav>
-      <a on:click={() => navigate(Page.fractionalize)}>Fractionalize</a>
-      <a on:click={() => navigate(Page.redeem)}>Redeem</a>
-      <a on:click={() => navigate(Page.about)}>About</a>
+    <a class="{$page === Page.fractionalize ? "selected" : ""}"
+    on:click={() => navigate(Page.fractionalize)}>
+        Fractionalize
+    </a>
+    <a class="{$page === Page.redeem ? "selected" : ""}"
+    on:click={() => navigate(Page.redeem)}>
+        Redeem
+    </a>
+    <a class="{$page === Page.about ? "selected" : ""}"
+    on:click={() => navigate(Page.about)}>
+        About
+    </a>
   </nav>
 </header>
 
@@ -49,12 +58,17 @@
 
       a {
           cursor: pointer;
-          color: white;
+          color: #acacac;
           font-size: 18px;
-          font-weight: 600;
+          font-weight: 500;
           text-decoration: none;
           padding: 0.5em 1em;
           margin: 0.5em 1em;
+      }
+
+      .selected {
+        color: white;
+          font-weight: 600;
       }
   }
 }</style>

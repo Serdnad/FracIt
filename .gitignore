@@ -1,3 +1,6 @@
-testing
-ticketer
+.DS_Store
+contracts/out
+
 app/node_modules
+app/.vercel
+app/.DS_Store

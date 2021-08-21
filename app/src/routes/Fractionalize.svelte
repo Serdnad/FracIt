@@ -4,18 +4,27 @@
     import NftCard from "../components/shared/NftCard.svelte"
     import FracIt from "../helpers/frac_it";
     import InputGroup from "../components/shared/InputGroup.svelte";
+    import Popup from "../components/shared/Popup.svelte";
 
     let nftAddress: string
     let nftTokenId: string
-
-    let tokenSymbol: string
     let tokenSupply: string
 
+    let showPopup = false
+    let newContract: string
+
     async function fractionalize() {
-        alert(nftAddress)
-        FracIt.fractionalize(nftAddress, nftTokenId, tokenSymbol, tokenSupply)
+        newContract = await FracIt.fractionalize(nftAddress, nftTokenId, tokenSupply)
+
+        showPopup = true
     }
 </script>
+
+<Popup
+    visible={showPopup}
+    title={"Tokens Deployed"}
+    body={`Tokens deployed at: ${newContract}`}
+/>
 
 <div class="container">
     <div class="row">
@@ -39,13 +48,6 @@
             </InputGroup>
 
             <InputGroup label={"New Tokens"}>
-                <LabelledInput
-                    label={""}
-                    placeholder={"SYM"}
-                    hint={"A 2-5 character symbol for your tokens."}
-                    bind:value={tokenSymbol}
-                />
-
                 <LabelledInput
                     label={""}
                     placeholder={"1000"}

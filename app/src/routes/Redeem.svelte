@@ -3,8 +3,22 @@
     import Button from "../components/shared/Button.svelte"
     import FracIt from "../helpers/frac_it";
     import NftCard from "../components/shared/NftCard.svelte"
+    import NftHelper from "../helpers/nft_helper";
+import InputGroup from "../components/shared/InputGroup.svelte";
 
     let address: string
+
+    let nftAddress: string
+    let nftTokenId: string
+
+    $: {
+        if ((address ?? "") != "") {
+            NftHelper.getFromFungibleAddress(address).then((nft) => {
+                nftAddress = nft.address
+                nftTokenId = nft.token_id
+            })
+        }
+    }
 
     async function redeem() {
         FracIt.redeem(address)
@@ -13,16 +27,17 @@
 
 <div class="container">
     <div class="row">
-        <!-- TODO -->
-        <NftCard />
+        <NftCard address={nftAddress} tokenId={nftTokenId} />
 
         <div class="form">
-            <LabelledInput
-                label={"Tokens Address"}
-                placeholder={"KT1DyVArg..."}
-                hint={"The fungible tokens' contract address."}
-                bind:value={address}
-            />
+            <InputGroup label={"Tokens Address"}>
+                <LabelledInput
+                    label={""}
+                    placeholder={"KT1DyVArg..."}
+                    hint={"The fungible tokens' contract address."}
+                    bind:value={address}
+                />
+            </InputGroup>
         </div>
     </div>
 

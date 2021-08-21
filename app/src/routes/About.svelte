@@ -14,14 +14,12 @@
 
     <TextPair
         title={"Why fractionalize?"}
-        body={`NFTs are increasingly being used for art, gaming, ownership, and more. With the value of NFTs skyrocketing, many netizens are finding themselves priced out of new experiences.
-			
-			Fractionalizing NFTs opens the gates to more people, making Web3 accessible once more.`}
+        body={`NFTs are increasingly being used for art, gaming, ownership, and more. As the prices of NFTs rise, however, many netizens are finding themselves priced out of the most exciting experiences that NFTs have to offer. Fractionalizing NFTs reopens the gates to NFTs for more people to build communities around art, ownership, and game assets, making Web3 accessible once again.`}
     />
 
     <TextPair
         title={"How does it work?"}
-        body={`When an NFT is fractionalized through Frac, it's put into a vault securely stored on chain. Then, a fixed number of fractions, in the form of fungible tokens, are minted and given to the original owner.`}
+        body={`When an NFT is fractionalized through Frac It, it's put into a vault securely stored on chain. Then, a fixed number of fractions, in the form of fungible tokens, are minted and given to the original owner. The owner can then distribute or sell these tokens as they see fit to share the joy of NFT ownership.`}
     />
 
     <TextPair
