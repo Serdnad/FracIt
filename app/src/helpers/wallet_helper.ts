@@ -1,15 +1,15 @@
-import { TezosToolkit } from "@taquito/taquito"
+import { TezosToolkit, Wallet } from "@taquito/taquito"
 import { BeaconWallet } from "@taquito/beacon-wallet"
 import { NetworkType } from "@airgap/beacon-sdk"
 
+/**
+ * Module for interfacing with Tezos wallet.
+ */
 module WalletHelper {
-
     const FLORENCE_RPC_URL = "https://rpc.florence.tzstats.com"
-    const FRAC_IT_ADDRESS = "..."
 
-    let Tezos: TezosToolkit
+    export let Tezos: TezosToolkit
     let wallet: BeaconWallet
-    let userAddress = ""
 
     export const initialize = async () => {
         Tezos = new TezosToolkit(FLORENCE_RPC_URL)
@@ -19,7 +19,7 @@ module WalletHelper {
         })
     }
 
-    export const isConnected = async () => {
+    export const isConnected = async (): Promise<boolean> => {
         const activeAccount = await wallet.client.getActiveAccount()
         return activeAccount != null
     }
@@ -33,7 +33,6 @@ module WalletHelper {
                 },
             })
             Tezos.setWalletProvider(wallet)
-            userAddress = await wallet.getPKH()
         } catch (err) {
             console.error(err)
         }
@@ -42,11 +41,11 @@ module WalletHelper {
     export const disconnect = () => {
         wallet.client.destroy()
         wallet = undefined
-        userAddress = ""
     }
 
-    export const getTokens = () => {
-        
+    export const getActiveWallet = async (): Promise<Wallet> => {
+        if (!(await isConnected())) await connect()
+        return Tezos.wallet
     }
 }
 

@@ -10,6 +10,7 @@
 
     onMount(async () => {
         await WalletHelper.initialize()
+        // await WalletHelper.connect()
     })
 </script>
 

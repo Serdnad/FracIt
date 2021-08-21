@@ -1,4 +1,6 @@
 <script lang="ts">
+	export let value: string
+
 	export let label: string;
 	export let placeholder: string;
 	export let hint: string | undefined;
@@ -6,7 +8,7 @@
 
 <div>
 	<p>{label}</p>
-	<input {placeholder} />
+	<input {placeholder} bind:value={value}/>
 
 	{#if hint}
 		<p class="hint">{hint}</p>
@@ -20,8 +22,8 @@
 
 	p {
 		color: white;
-		font-size: 1.25em;
-		font-weight: 600;
+		font-size: 1em;
+		font-weight: 500;
 		margin-bottom: 4px;
 	}
 
@@ -33,13 +35,13 @@
 		border-radius: 6px;
 		height: 32px;
 		width: 100%;
+		padding: 4px 8px;
 
 		:focus,
 		:active,
 		:hover {
 			border: none;
 		}
-		// width: 240px;
 	}
 
 	.hint {

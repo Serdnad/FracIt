@@ -9,8 +9,8 @@
 		cursor: pointer;
 		transition: all 250ms;
 
-		height: 64px;
-		width: 320px;
+		height: 56px;
+		width: 240px;
 
 		background: #c82e53;
 		box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.25);
