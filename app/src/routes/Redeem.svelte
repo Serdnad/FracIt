@@ -1,11 +1,13 @@
-<script>
+<script lang="ts">
     import LabelledInput from "../components/shared/LabelledInput.svelte"
     import Button from "../components/shared/Button.svelte"
     import FracIt from "../helpers/frac_it";
     import NftCard from "../components/shared/NftCard.svelte"
 
+    let address: string
+
     async function redeem() {
-        FracIt.redeem()
+        FracIt.redeem(address)
     }
 </script>
 
@@ -15,9 +17,10 @@
 
         <div class="form">
             <LabelledInput
-                label={"Address"}
-                placeholder={"SYM"}
+                label={"Tokens Address"}
+                placeholder={"KT1DyVArg..."}
                 hint={"The fungible tokens' contract address."}
+                bind:value={address}
             />
         </div>
     </div>

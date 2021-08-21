@@ -41,16 +41,15 @@ module FracIt {
         console.log(confirmation)
     }
 
-    export const redeem = async () => {
-        console.log("START REDEEM")
+    export const redeem = async (address: string) => {
         if (contract == null) await initContract()
 
         console.log("REDEEM")
         console.log(contract)
-        console.log(contract.methods)
+        const op = await contract.methods.redeem(address).send()
+        console.log(op)
 
-
-        // contract.methods.
+        await op.confirmation()
     }
 }
 
