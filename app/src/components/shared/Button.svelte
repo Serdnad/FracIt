@@ -2,7 +2,7 @@
 	export let text: string;
 </script>
 
-<button>{text}</button>
+<button on:click>{text}</button>
 
 <style lang="scss">
 	button {

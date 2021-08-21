@@ -1,84 +1,74 @@
-<!-- <script context="module" lang="ts">
-	export const prerender = true;
-</script> -->
 <script lang="ts">
-    import { onMount } from "svelte"
-    // import { TezosToolkit } from '@taquito/taquito';
+    import LabelledInput from "../components/shared/LabelledInput.svelte"
+    import Button from "../components/shared/Button.svelte"
 
-    // import Test from '$lib/tezos/test'
-    // import { TezosToolkit } from '@taquito/taquito';
-    // import { BeaconWallet } from '@taquito/beacon-wallet';
-    onMount(async () => {
-        // Test.connectWallet()
-        // global = this;
-        // let TezosToolkit = (await import('@taquito/taquito')).default;
-        // console.log(TezosToolkit);
-        // const T = (await import('$lib/tezos/test')).default;
-        // global = this;
-        // await Test.qaz();
-        // (window as any).global = window;
-        // await Test.asd();
-        // Test.qaz();
-        // Test.connectWallet();
-        // const options = {
-        // 	name: 'MyAwesomeDapp',
-        // 	iconUrl: 'https://tezostaquito.io/img/favicon.png',
-        // 	preferredNetwork: 'florencenet',
-        // 	eventHandlers: {
-        // 		PERMISSION_REQUEST_SUCCESS: {
-        // 			handler: async (data) => {
-        // 				console.log('permission data:', data)
-        // 			},
-        // 		},
-        // 	},
-        // }
-        // const wallet = new BeaconWallet(options)
-        // // The Beacon wallet requires an extra step to set up the network to connect to and the permissions:
-        // await wallet.requestPermissions({
-        // 	network: {
-        // 		type: 'florencenet',
-        // 	},
-        // })
-    })
+    async function fractionalize() {
+        alert("DO IT")
+    }
 </script>
 
-<svelte:head>
-    <title>Home</title>
+<div class="container">
+    <div class="row">
+        <div class="nft">
 
-    <script src="https://www.tezbridge.com/plugin.js"></script>
-</svelte:head>
+            NFT GOES HERE
+        </div>
 
-<section>
-    <nav>
-        <h1>Hasd</h1>
-    </nav>
-</section>
+        <div class="form">
+            <LabelledInput
+                label={"Select NFT"}
+                placeholder={"SYM"}
+                hint={"The NFT to fractionalize."}
+            />
 
-<style>
-    section {
+            <LabelledInput
+                label={"New token symbol"}
+                placeholder={"SYM"}
+                hint={"A 2-5 letter symbol for your new tokens."}
+            />
+
+            <LabelledInput
+                label={"New token supply"}
+                placeholder={"1000"}
+                hint={"The number of fungible tokens to create."}
+            />
+        </div>
+    </div>
+
+    <Button text={"FRAC IT UP"} on:click={fractionalize} />
+</div>
+
+<style lang="scss">
+    .container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        flex: 1;
-    }
 
-    h1 {
-        width: 100%;
-    }
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 
-    .welcome {
-        position: relative;
-        width: 100%;
-        height: 0;
-        padding: 0 0 calc(100% * 495 / 2048) 0;
-    }
+        .row {
+            display: flex;
+            flex-basis: auto;
+            margin-bottom: 32px;
+        }
 
-    .welcome img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        display: block;
+        .nft {
+            flex: 1;
+            
+            background: #dddddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px 3px #22222244;
+
+            margin-right: 32px;
+        }
+
+        .form {
+            flex: 1;
+        }
     }
 </style>

@@ -1,6 +1,20 @@
 {
-  "name": "svelte-tezos-template",
+  "name": "FracIt",
+  "author": "Andres Gutierrez",
+  "description": "Fractionalization service for NFTs on the Tezos network",
   "version": "1.0.0",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "webpack serve --content-base public",
+    "validate": "svelte-check"
+  },
+  "dependencies": {
+    "@taquito/beacon-wallet": "^10.1.0",
+    "@taquito/taquito": "^10.1.0",
+    "file-loader": "^6.2.0",
+    "sass": "^1.38.0",
+    "svelte-routing": "^1.6.0"
+  },
   "devDependencies": {
     "@tsconfig/svelte": "^1.0.10",
     "@types/node": "^14.14.33",
@@ -30,17 +44,5 @@
     "webpack": "^5.24.4",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
-  },
-  "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
-    "dev": "webpack serve --content-base public",
-    "validate": "svelte-check"
-  },
-  "dependencies": {
-    "@taquito/beacon-wallet": "^9.0.0",
-    "@taquito/taquito": "^9.0.0",
-    "file-loader": "^6.2.0",
-    "sass": "^1.38.0",
-    "svelte-routing": "^1.6.0"
   }
 }

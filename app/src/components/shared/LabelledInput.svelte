@@ -14,6 +14,10 @@
 </div>
 
 <style lang="scss">
+	div {
+		text-align: start;
+	}
+
 	p {
 		color: white;
 		font-size: 1.25em;
@@ -39,11 +43,11 @@
 	}
 
 	.hint {
-		color: #d4d4d4;
+		color: #cccccc;
 		font-size: 0.8em;
 		font-weight: 400;
 
-		margin-top: 0;
+		margin-top: 4px;
 		width: 100%;
 	}
 </style>
