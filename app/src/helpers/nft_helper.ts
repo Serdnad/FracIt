@@ -4,7 +4,7 @@ import { Tzip12Module, tzip12 } from "@taquito/tzip12";
 // import { tzip16 } from "@taquito/tzip16";
 
 module NftHelper {
-    const FLORENCE_RPC_URL = "https://rpc.florence.tzstats.com"
+    const FLORENCE_RPC_URL = "https://florencenet.api.tez.ie"
 
     let Tezos: TezosToolkit
 

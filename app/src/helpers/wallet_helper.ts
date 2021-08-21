@@ -6,7 +6,7 @@ import { NetworkType } from "@airgap/beacon-sdk"
  * Module for interfacing with Tezos wallet.
  */
 module WalletHelper {
-    const FLORENCE_RPC_URL = "https://rpc.florence.tzstats.com"
+    const FLORENCE_RPC_URL = "https://florencenet.api.tez.ie"
 
     export let Tezos: TezosToolkit
     let wallet: BeaconWallet
