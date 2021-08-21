@@ -15,5 +15,6 @@ of entry to highly valuable assets, and a whole host of future applications.
 
 ### Details
 
-Website: ...
-Florence Contract Address: `...`
+Website: fracit.app
+
+Florence Contract Address: `KT1HvKKzay8Ba8JsG1YRDx1hBX11gU6CicKd`
