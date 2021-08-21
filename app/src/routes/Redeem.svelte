@@ -13,6 +13,7 @@
 
 <div class="container">
     <div class="row">
+        <!-- TODO -->
         <NftCard />
 
         <div class="form">

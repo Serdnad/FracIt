@@ -28,13 +28,12 @@ module FracIt {
         contract.methods.updateOperators([])
     }
 
-    export const fractionalize = async (nftAddress: string, nftTokenId: string, symbol: string, supply: string) => {
+    export const fractionalize = async (nftAddress: string, nftTokenId: string, supply: string) => {
         // TODO: update operators
 
         await initContract()
 
-        console.log(contract)
-        const op = await contract.methods.frac([nftAddress, nftTokenId, symbol, supply]).send()
+        const op = await contract.methods.frac([nftAddress, nftTokenId, supply]).send()
         console.log(op)
 
         const confirmation = await op.confirmation()
