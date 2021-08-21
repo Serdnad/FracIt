@@ -6,7 +6,7 @@ import WalletHelper from "./wallet_helper";
  * Module for interacting with the main FracIt smart contract.
  */
 module FracIt {
-    const ADDRESS = "KT1VcCELgmViyegFHiUYu3H1GZjw2FeW1tmL"
+    const ADDRESS = "KT1Qrk1Gqx3dAAbsue2BbtWYvhaX7KNBJwb7"
 
     // tmp
     const NFT_ADDRESS = "KT1DyVArgtUm6S4eYbyYLNFc7TYq9BYBtBCt"
