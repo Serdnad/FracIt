@@ -45,7 +45,7 @@ module FracIt {
 
         console.log("REDEEM")
         console.log(contract)
-        const op = await contract.methods.redeem(address).send()
+        const op = await contract.methods.defrac(address).send()
         console.log(op)
 
         await op.confirmation()
