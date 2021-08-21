@@ -41,7 +41,8 @@ module FracIt {
     }
 
     export const redeem = async (address: string) => {
-        if (contract == null) await initContract()
+        await WalletHelper.connect()
+        await initContract()
 
         console.log("REDEEM")
         console.log(contract)
