@@ -18,14 +18,6 @@ module FracIt {
         contract = await wallet.at(CONTRACT_ADDRESS)
     }
 
-    /** Prompt user to allow our contract to move the NFT on their behalf. */
-    const updateOperators = async(nftAddress: string) => {
-        const wallet = await WalletHelper.getActiveWallet()
-        alert(nftAddress)
-        const contract = await wallet.at(nftAddress)
-        await contract.methods.update_operators([]).send()
-    }
-
     /** Fractionalize the NFT */
     export const fractionalize = async (nftAddress: string, nftTokenId: string, supply: string): Promise<string> => {
         await WalletHelper.connect()
@@ -45,20 +37,15 @@ module FracIt {
         }]))
         batch.withContractCall(contract.methods.frac(nftAddress, nftTokenId, supply))
         
-        alert("Please wait for confirmation from blockchain...")
-
         const op = await batch.send()
         await op.confirmation()
 
         const storage = await (await WalletHelper.Tezos.contract.at(CONTRACT_ADDRESS)).storage()
 
-        const r = await storage["rev_issues"].get({
-            0: nftAddress,
-            1: nftTokenId
+        return await storage["rev_issues"].get({
+            address: nftAddress,
+            token_id: parseInt(nftTokenId)
         })
-        console.log(r)
-
-        return r
     }
 
     /** Redeem the NFT */

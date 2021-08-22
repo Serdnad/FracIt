@@ -1,17 +1,16 @@
 <script lang="ts">
     export let visible = false
-
     export let title: string
     export let body: string
 </script>
 
 {#if visible}
     <div class="background" on:click={() => visible = false}>
-        <div class="popup">
+        <div class="popup" on:click={(e) => e.stopPropagation()}>
             <h2>{title}</h2>
             <p>{body}</p>
 
-            <div class="bottom"/>
+            <div class="accent"/>
         </div>
     </div>
 {/if}
@@ -33,19 +32,19 @@
         position: relative;
         background: white;
         margin: 64px auto;
-        padding: 32px 64px;
-        width: 256px;
+        padding: 32px 32px;
+        width: 400px;
         border-radius: 12px;
 
-        .bottom {
+        .accent {
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
 
-            height: 16px;
+            height: 32px;
             background: green;
-            border-radius: 0 0 12px 12px;
+            border-radius: 12px 12px 0 0;
         }
     }
 </style>

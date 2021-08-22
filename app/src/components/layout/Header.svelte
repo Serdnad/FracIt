@@ -1,9 +1,9 @@
+
 <script lang="ts">
     import { Page, page } from "../../stores/navigation";
 
     function navigate(to: Page) {
         page.set(to)
-        window.history.pushState("", to.valueOf(), to.valueOf())
     }
 </script>
 

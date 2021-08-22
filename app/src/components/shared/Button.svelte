@@ -1,13 +1,26 @@
 <script lang="ts">
+	import { Circle } from "svelte-loading-spinners"
+
+	export let loading = false
 	export let text: string;
 </script>
 
-<button on:click>{text}</button>
+<button on:click>
+	{#if loading}
+		<Circle color={"white"} size={"32"} />
+	{:else}
+		{text}
+	{/if}
+</button>
 
 <style lang="scss">
 	button {
 		cursor: pointer;
 		transition: all 250ms;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
 		height: 56px;
 		width: 240px;

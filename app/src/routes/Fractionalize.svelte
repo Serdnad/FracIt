@@ -10,11 +10,14 @@
     let nftTokenId: string
     let tokenSupply: string
 
+    let loading = false
     let showPopup = false
     let newContract: string
 
     async function fractionalize() {
+        loading = true
         newContract = await FracIt.fractionalize(nftAddress, nftTokenId, tokenSupply)
+        loading = false
 
         showPopup = true
     }
@@ -58,7 +61,7 @@
         </div>
     </div>
 
-    <Button text={"FRAC IT"} on:click={fractionalize} />
+    <Button {loading} text={"FRAC IT"} on:click={fractionalize} />
 </div>
 
 <style lang="scss">
